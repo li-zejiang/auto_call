@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../pages/dial/index.dart';
 import '../pages/customer/index.dart';
@@ -73,7 +74,7 @@ final router = GoRouter(
 );
 
 /// 带有底部导航栏的 Shell 容器组件
-class ScaffoldWithNavBar extends StatelessWidget {
+class ScaffoldWithNavBar extends ConsumerWidget {
   const ScaffoldWithNavBar({
     required this.child,
     super.key,
@@ -82,13 +83,13 @@ class ScaffoldWithNavBar extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: child,
       bottomNavigationBar: BottomNavigationBar(
         // 获取当前路由路径来决定选中的 Tab
         currentIndex: _calculateSelectedIndex(context),
-        onTap: (int idx) => _onItemTapped(idx, context),
+        onTap: (int idx) => _onItemTapped(idx, context, ref),
         // 主题配置（在 ThemeProvider 中统一定义）
         items: const [
           BottomNavigationBarItem(
@@ -121,12 +122,14 @@ class ScaffoldWithNavBar extends StatelessWidget {
   }
 
   /// 导航点击跳转处理
-  void _onItemTapped(int index, BuildContext context) {
+  void _onItemTapped(int index, BuildContext context, WidgetRef ref) {
     switch (index) {
       case 0:
         GoRouter.of(context).go('/');
         break;
       case 1:
+        // 每次点击客户导航栏，重置子页面为客户列表
+        ref.read(customerTabProvider.notifier).state = 0;
         GoRouter.of(context).go('/customer');
         break;
       case 2:

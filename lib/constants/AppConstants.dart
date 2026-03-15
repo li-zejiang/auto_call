@@ -29,7 +29,14 @@ class AppConstants {
   // 底部导航栏标签
   static const String NAV_DIAL = '拨号';
   static const String NAV_CUSTOMER = '客户';
-  static const String NAV_SETTINGS = '我的';
+  static const String NAV_SETTINGS = '设置';
+
+  // 客户与待办标签
+  static const String LABEL_CUSTOMER = '客户';
+  static const String LABEL_TODO = '待办';
+  static const String LABEL_EXPORT = '导出';
+  static const String LABEL_ADD = '新增';
+  static const String LABEL_BATCH = '批量';
 
   // 按钮文本
   static const String BTN_CANCEL = '取消';
@@ -65,6 +72,8 @@ class AppConstants {
   static const String LABEL_INSTRUCTIONS = '使用说明';
   static const String LABEL_SUPPORT = '好评支持';
   static const String LABEL_TEAM_SPACE = '团队空间';
+  static const String LABEL_SERVICE_CENTER = '服务中心';
+  static const String LABEL_MORE_SETTINGS = '更多设置';
   static const String LABEL_BUY_MEMBER = '购买会员';
   static const String LABEL_MEMBER_EXPIRED = '会员特权已到期';
   static const String LABEL_MANUAL_DIAL = '手动拨号';

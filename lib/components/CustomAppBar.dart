@@ -23,12 +23,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// 是否显示默认的右侧动作（分享、下载）
   final bool showDefaultActions;
 
+  /// 是否显示左侧默认的搜索按钮（仅在不可返回时生效）
+  final bool showLeadingSearch;
+
+  /// 自定义标题组件，若提供则覆盖默认 Text 逻辑
+  final Widget? titleWidget;
+
   const CustomAppBar({
     super.key,
     required this.title,
     this.actions,
     this.leading,
     this.showDefaultActions = true,
+    this.showLeadingSearch = true,
+    this.titleWidget,
   });
 
   @override
@@ -39,26 +47,29 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       centerTitle: true,
       elevation: 0,
-      // 自动决定左侧按钮：如果能返回则显示返回按钮，否则显示默认搜索（除非手动指定 leading）
+      // 自动决定左侧按钮：如果能返回则显示返回按钮，否则根据 showLeadingSearch 显示默认搜索
       leading: leading ??
           (canPop
               ? IconButton(
                   icon: const Icon(Icons.arrow_back_ios_new, size: 20),
                   onPressed: () => Navigator.of(context).pop(),
                 )
-              : AppBarButton(
-                  icon: Icons.search,
-                  label: AppConstants.LABEL_SEARCH,
-                  onPressed: () {
-                    CommonToast.show(
-                        '${AppConstants.LABEL_SEARCH}${AppConstants.MSG_NOT_IMPLEMENTED}',
-                        context: context);
-                  },
-                )),
-      title: Text(
-        title,
-        style: Theme.of(context).appBarTheme.titleTextStyle,
-      ),
+              : (showLeadingSearch
+                  ? AppBarButton(
+                      icon: Icons.search,
+                      label: AppConstants.LABEL_SEARCH,
+                      onPressed: () {
+                        CommonToast.show(
+                            '${AppConstants.LABEL_SEARCH}${AppConstants.MSG_NOT_IMPLEMENTED}',
+                            context: context);
+                      },
+                    )
+                  : null)),
+      title: titleWidget ??
+          Text(
+            title,
+            style: Theme.of(context).appBarTheme.titleTextStyle,
+          ),
       actions: actions ??
           (showDefaultActions
               ? [

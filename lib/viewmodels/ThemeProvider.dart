@@ -91,7 +91,12 @@ class ThemeProvider extends StateNotifier<AppThemeMode> {
       unselectedItemColor: Colors.grey,
       selectedLabelStyle: TextStyle(fontSize: 11),
       unselectedLabelStyle: TextStyle(fontSize: 11),
+      iconSize: 22,
       type: BottomNavigationBarType.fixed,
+      elevation: 8,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      enableFeedback: false, // 禁用触觉反馈，减少动画感
     ),
     dividerTheme: const DividerThemeData(
       color: Color(0xFFEEEEEE),
@@ -130,8 +135,12 @@ class ThemeProvider extends StateNotifier<AppThemeMode> {
       unselectedItemColor: Color(0xFFB0B0B0),
       selectedLabelStyle: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
       unselectedLabelStyle: TextStyle(fontSize: 11),
+      iconSize: 22,
       type: BottomNavigationBarType.fixed,
       elevation: 8,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      enableFeedback: false,
     ),
     dividerTheme: const DividerThemeData(
       color: Color(0xFF333333),
@@ -177,7 +186,12 @@ class ThemeProvider extends StateNotifier<AppThemeMode> {
       unselectedItemColor: Color(0xFF8D6E63),
       selectedLabelStyle: TextStyle(fontSize: 11),
       unselectedLabelStyle: TextStyle(fontSize: 11),
+      iconSize: 22,
       type: BottomNavigationBarType.fixed,
+      elevation: 8,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      enableFeedback: false,
     ),
     dividerTheme: const DividerThemeData(
       color: Color(0xFFE5D5C0),
