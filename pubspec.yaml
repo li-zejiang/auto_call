@@ -1,0 +1,34 @@
+name: auto_call
+description: 自动拨号应用（Android/Web/Windows）
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  flutter_riverpod: ^2.5.1
+  url_launcher: ^6.3.0
+  go_router: ^14.2.0
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+  path_provider: ^2.1.3
+  flutter_svg: ^2.0.10+1
+  intl: ^0.19.0
+  dio: ^5.5.0+1
+  shared_preferences: ^2.2.3
+  flutter_local_notifications: ^21.0.0
+  flutter_foreground_task: ^9.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+  isar_generator: ^3.1.0+1
+  build_runner: ^2.4.11
+
+flutter:
+  uses-material-design: true
