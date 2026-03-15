@@ -13,10 +13,13 @@ workflows:
           flutter packages pub get
       - name: Flutter build iOS
         script: |
-          flutter build ios --release --no-codesign
+          # 使用 build ipa 代替 build ios，这是目前 Flutter 推荐的打包方式
+          # 如果你配置了代码签名，请移除 --no-codesign
+          flutter build ipa --release --no-codesign
     artifacts:
-      - build/ios/iphoneos/*.app
       - build/ios/ipa/*.ipa
+      - build/ios/iphoneos/*.app
+      - build/ios/archive/*.xcarchive
     publishing:
       email:
         recipients:
