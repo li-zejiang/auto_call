@@ -26,19 +26,19 @@ class GridItem extends StatelessWidget {
         children: [
           // 图标容器
           Container(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: colorScheme.primary.withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
-            child: Icon(icon, color: colorScheme.primary),
+            child: Icon(icon, color: colorScheme.primary, size: 20),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 6),
           // 标签文字
           Text(
             label,
             style: TextStyle(
-              fontSize: AppConstants.FONT_SIZE_SMALL,
+              fontSize: 11,
               color: colorScheme.onSurface,
             ),
           ),

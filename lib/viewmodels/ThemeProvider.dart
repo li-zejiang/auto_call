@@ -83,6 +83,8 @@ class ThemeProvider extends StateNotifier<AppThemeMode> {
       outline: const Color(0xFFEEEEEE),
     ),
     scaffoldBackgroundColor: const Color(0xFFF5F7FA),
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
     appBarTheme: _buildAppBarTheme(
         Brightness.light, Colors.white, const Color(0xFF333333)),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -124,6 +126,8 @@ class ThemeProvider extends StateNotifier<AppThemeMode> {
       outline: const Color(0xFF333333),
     ),
     scaffoldBackgroundColor: const Color(0xFF121212),
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
     // 顶部状态栏和导航栏配置
     appBarTheme: _buildAppBarTheme(
         Brightness.dark, const Color(0xFF1E1E1E), Colors.white),
@@ -176,6 +180,8 @@ class ThemeProvider extends StateNotifier<AppThemeMode> {
       outline: const Color(0xFFE5D5C0),
     ),
     scaffoldBackgroundColor: const Color(0xFFFAF2E6),
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
     appBarTheme: _buildAppBarTheme(
         Brightness.light, const Color(0xFFF5EBD7), const Color(0xFF5D4037)),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(

@@ -11,6 +11,9 @@ class AppColors {
   static const Color SUCCESS = Color(0xFF4CAF50);
   static const Color WARNING = Color(0xFFFFC107);
   static const Color ERROR = Color(0xFFF44336);
+  static const Color TEAM_SPACE_BLUE = Color(0xFF4A78F0);
+  static const Color MEMBER_BTN_DARK = Color(0xFF2D2D3A);
+  static const Color VIP_GOLD = Color(0xFFFFD700);
 }
 
 /// 全局业务常量与文案配置
@@ -50,6 +53,7 @@ class AppConstants {
   static const String MSG_CLICK_TO_REFRESH = '点击刷新';
   static const String MSG_LOADING_ERROR = '加载出错: ';
   static const String MSG_NO_CUSTOMER_DATA = '暂无客户数据';
+  static const String MSG_NO_TODO_DATA = '暂无待办事项';
 
   // 统计与列表标签
   static const String LABEL_DIALED_TODAY = '今日已拨打: ';
@@ -72,10 +76,13 @@ class AppConstants {
   static const String LABEL_INSTRUCTIONS = '使用说明';
   static const String LABEL_SUPPORT = '好评支持';
   static const String LABEL_TEAM_SPACE = '团队空间';
+  static const String LABEL_TEAM_SPACE_SUBTITLE = '数据统计、任务分配';
   static const String LABEL_SERVICE_CENTER = '服务中心';
   static const String LABEL_MORE_SETTINGS = '更多设置';
   static const String LABEL_BUY_MEMBER = '购买会员';
   static const String LABEL_MEMBER_EXPIRED = '会员特权已到期';
+  static const String LABEL_PERSONAL_INFO = '个人信息';
+  static const String LABEL_LEARN_MORE = '了解更多';
   static const String LABEL_MANUAL_DIAL = '手动拨号';
   static const String LABEL_IMPORT_PHONE = '导入号码';
   static const String LABEL_REFRESH = '刷新';

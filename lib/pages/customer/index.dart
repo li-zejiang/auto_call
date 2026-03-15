@@ -180,7 +180,7 @@ class CustomerPage extends ConsumerWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            '暂无待办事项',
+            AppConstants.MSG_NO_TODO_DATA,
             style:
                 TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.4)),
           ),
