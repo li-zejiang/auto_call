@@ -45,9 +45,11 @@ workflows:
           flutter build ios --release --no-codesign
       - name: Package IPA for manual signing
         script: |
-          # 为爱思助手等第三方工具手动打包成未签名的 .ipa
+          # 确保清理旧数据并创建标准 Payload 结构
+          rm -rf Payload Runner.ipa
           mkdir -p Payload
           cp -r build/ios/iphoneos/Runner.app Payload/
+          # 必须在包含 Payload 的目录下进行压缩
           zip -r Runner.ipa Payload
     artifacts:
       - "*.ipa"
