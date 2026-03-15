@@ -27,45 +27,52 @@ class CustomerPage extends ConsumerWidget {
         showLeadingSearch: false, // 隐藏左侧默认搜索
         titleWidget: Row(
           children: [
-            _buildTabItem(context, ref, AppConstants.LABEL_CUSTOMER, 0, selectedTab),
+            _buildTabItem(
+                context, ref, AppConstants.LABEL_CUSTOMER, 0, selectedTab),
             const SizedBox(width: 20),
-            _buildTabItem(context, ref, AppConstants.LABEL_TODO, 1, selectedTab),
+            _buildTabItem(
+                context, ref, AppConstants.LABEL_TODO, 1, selectedTab),
           ],
         ),
         actions: [
           AppBarButton(
             icon: Icons.search,
             label: AppConstants.LABEL_SEARCH,
-            onPressed: () => _showNotImplemented(context, AppConstants.LABEL_SEARCH),
+            onPressed: () =>
+                _showNotImplemented(context, AppConstants.LABEL_SEARCH),
           ),
           AppBarButton(
             icon: Icons.ios_share,
             label: AppConstants.LABEL_EXPORT,
-            onPressed: () => _showNotImplemented(context, AppConstants.LABEL_EXPORT),
+            onPressed: () =>
+                _showNotImplemented(context, AppConstants.LABEL_EXPORT),
           ),
           AppBarButton(
             icon: Icons.person_add_alt_1_outlined,
             label: AppConstants.LABEL_ADD,
-            onPressed: () => _showNotImplemented(context, AppConstants.LABEL_ADD),
+            onPressed: () =>
+                _showNotImplemented(context, AppConstants.LABEL_ADD),
           ),
           AppBarButton(
             icon: Icons.group_add_outlined,
             label: AppConstants.LABEL_BATCH,
-            onPressed: () => _showNotImplemented(context, AppConstants.LABEL_BATCH),
+            onPressed: () =>
+                _showNotImplemented(context, AppConstants.LABEL_BATCH),
           ),
         ],
       ),
-      body: selectedTab == 0 
+      body: selectedTab == 0
           ? _buildCustomerList(context, customerState, colorScheme)
           : _buildTodoList(context, colorScheme),
     );
   }
 
   /// 构建标签项
-  Widget _buildTabItem(BuildContext context, WidgetRef ref, String label, int index, int selectedIndex) {
+  Widget _buildTabItem(BuildContext context, WidgetRef ref, String label,
+      int index, int selectedIndex) {
     final isSelected = index == selectedIndex;
     final theme = Theme.of(context);
-    
+
     return GestureDetector(
       onTap: () => ref.read(customerTabProvider.notifier).state = index,
       child: Column(
@@ -76,12 +83,14 @@ class CustomerPage extends ConsumerWidget {
             style: TextStyle(
               fontSize: 18,
               fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-              color: isSelected ? theme.colorScheme.onSurface : theme.colorScheme.onSurface.withValues(alpha: 0.5),
+              color: isSelected
+                  ? theme.colorScheme.onSurface
+                  : theme.colorScheme.onSurface.withValues(alpha: 0.5),
             ),
           ),
           if (isSelected)
             Container(
-              margin: const EdgeInsets.top(4),
+              margin: const EdgeInsets.only(top: 4),
               height: 2,
               width: 20,
               color: theme.colorScheme.primary,
@@ -92,7 +101,8 @@ class CustomerPage extends ConsumerWidget {
   }
 
   /// 构建客户列表
-  Widget _buildCustomerList(BuildContext context, AsyncValue customerState, ColorScheme colorScheme) {
+  Widget _buildCustomerList(
+      BuildContext context, AsyncValue customerState, ColorScheme colorScheme) {
     return Column(
       children: [
         // 顶部筛选与排序栏
@@ -102,12 +112,14 @@ class CustomerPage extends ConsumerWidget {
             children: [
               Text(
                 '${AppConstants.LABEL_ALL_CUSTOMERS} | ${AppConstants.LABEL_LATEST_ADDED}',
-                style: TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.5)),
+                style: TextStyle(
+                    color: colorScheme.onSurface.withValues(alpha: 0.5)),
               ),
               const Spacer(),
               // 筛选按钮
               TextButton.icon(
-                onPressed: () => _showNotImplemented(context, AppConstants.LABEL_FILTER),
+                onPressed: () =>
+                    _showNotImplemented(context, AppConstants.LABEL_FILTER),
                 icon: const Icon(Icons.filter_list, size: 18),
                 label: const Text(AppConstants.LABEL_FILTER),
                 style: TextButton.styleFrom(
@@ -129,7 +141,8 @@ class CustomerPage extends ConsumerWidget {
                 return Center(
                   child: Text(
                     AppConstants.MSG_NO_CUSTOMER_DATA,
-                    style: TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.5)),
+                    style: TextStyle(
+                        color: colorScheme.onSurface.withValues(alpha: 0.5)),
                   ),
                 );
               }
@@ -168,7 +181,8 @@ class CustomerPage extends ConsumerWidget {
           const SizedBox(height: 16),
           Text(
             '暂无待办事项',
-            style: TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.4)),
+            style:
+                TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.4)),
           ),
         ],
       ),
@@ -176,6 +190,7 @@ class CustomerPage extends ConsumerWidget {
   }
 
   void _showNotImplemented(BuildContext context, String label) {
-    CommonToast.show('$label ${AppConstants.MSG_NOT_IMPLEMENTED}', context: context);
+    CommonToast.show('$label ${AppConstants.MSG_NOT_IMPLEMENTED}',
+        context: context);
   }
 }

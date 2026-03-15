@@ -43,142 +43,214 @@ class SettingsPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: AppConstants.TITLE_PROFILE,
+      appBar: CustomAppBar(
+        title: '',
         showDefaultActions: false,
-        showLeadingSearch: false, // 隐藏左侧默认搜索
+        showLeadingSearch: false,
+        actions: [
+          AppBarButton(
+            icon: Icons.person_outline,
+            label: '个人信息',
+            onPressed: () {
+              CommonToast.show('个人信息${AppConstants.MSG_NOT_IMPLEMENTED}',
+                  context: context);
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(AppConstants.PADDING),
+        padding: const EdgeInsets.symmetric(horizontal: AppConstants.PADDING),
         child: Column(
           children: [
-            // 用户信息卡片
-            Card(
-              elevation: theme.cardTheme.elevation,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 28,
-                      backgroundColor: colorScheme.primaryContainer,
-                      child: Icon(Icons.person,
-                          color: colorScheme.onPrimaryContainer),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '繁星若尘',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: colorScheme.onSurface,
+            // 1. 用户信息 Header
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: Row(
+                children: [
+                  const CircleAvatar(
+                    radius: 35,
+                    backgroundImage: NetworkImage(
+                        'https://p.qqan.com/up/2021-3/16151684606439132.jpg'), // 占位图
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              '繁星若尘',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: colorScheme.onSurface,
+                              ),
                             ),
+                            const SizedBox(width: 4),
+                            const Icon(Icons.workspace_premium,
+                                color: Colors.amber, size: 18),
+                          ],
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          AppConstants.LABEL_MEMBER_EXPIRED,
+                          style: TextStyle(
+                            color: colorScheme.onSurface.withValues(alpha: 0.4),
+                            fontSize: 13,
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            AppConstants.LABEL_MEMBER_EXPIRED,
-                            style: TextStyle(
-                              color:
-                                  colorScheme.onSurface.withValues(alpha: 0.5),
-                              fontSize: 12,
-                            ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF2D2D3A),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 8),
+                    ),
+                    child: const Text(AppConstants.LABEL_BUY_MEMBER,
+                        style: TextStyle(fontSize: 13)),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
+
+            // 2. 团队空间 (Blue Card)
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: const Color(0xFF4A78F0),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.cloud_queue, color: Colors.white, size: 32),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          AppConstants.LABEL_TEAM_SPACE,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
                           ),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          '数据统计、任务分配',
+                          style: TextStyle(
+                            color: Colors.white.withValues(alpha: 0.8),
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
                     ),
-                    FilledButton(
-                      onPressed: () {},
-                      style: FilledButton.styleFrom(
-                        backgroundColor: colorScheme.primary,
-                        foregroundColor: colorScheme.onPrimary,
-                      ),
-                      child: const Text(AppConstants.LABEL_BUY_MEMBER),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      '了解更多',
+                      style: TextStyle(color: Colors.white, fontSize: 13),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 16),
 
-            // 1. 团队空间 (Team Space)
-            _buildSectionCard(
-              context,
-              title: AppConstants.LABEL_TEAM_SPACE,
-              icon: Icons.cloud,
-              items: [], // 目前为空，可以根据需求添加
-            ),
-            const SizedBox(height: 16),
-
-            // 2. 服务中心 (Service Center)
-            _buildSectionCard(
+            // 3. 服务中心
+            _buildGridSection(
               context,
               title: AppConstants.LABEL_SERVICE_CENTER,
-              icon: Icons.room_service_outlined,
-              items: serviceCenterItems,
+              items: [
+                GridItem(
+                    AppConstants.LABEL_DIAL_SETTINGS, Icons.settings_outlined,
+                    onTap: () => context.push('/dial-settings')),
+                GridItem(AppConstants.LABEL_ACCESSIBILITY,
+                    Icons.airplanemode_active_outlined,
+                    onTap: () => context.push('/accessibility')),
+                GridItem(
+                    AppConstants.LABEL_BACKEND_ADMIN, Icons.dashboard_outlined,
+                    onTap: () {
+                  CommonToast.show(
+                      '${AppConstants.LABEL_BACKEND_ADMIN}${AppConstants.MSG_NOT_IMPLEMENTED}',
+                      context: context);
+                }),
+                GridItem(AppConstants.LABEL_SMS_SETTINGS, Icons.mail_outline,
+                    onTap: () => context.push('/sms-settings')),
+                const GridItem(
+                    AppConstants.LABEL_LAYOUT_SETTINGS, Icons.grid_view),
+                const GridItem(
+                    AppConstants.LABEL_BLACKLIST, Icons.block_flipped),
+              ],
             ),
             const SizedBox(height: 16),
 
-            // 3. 更多设置 (More Settings)
-            _buildSectionCard(
+            // 4. 更多设置
+            _buildGridSection(
               context,
               title: AppConstants.LABEL_MORE_SETTINGS,
-              icon: Icons.settings_outlined,
-              items: moreSettingsItems,
+              items: serviceCenterItems, // 这里原本 serviceCenterItems 其实放的是分享等项
             ),
+            const SizedBox(height: 24),
           ],
         ),
       ),
     );
   }
 
-  /// 构建分组卡片
-  Widget _buildSectionCard(
+  /// 构建网格分组区域
+  Widget _buildGridSection(
     BuildContext context, {
     required String title,
-    required IconData icon,
     required List<Widget> items,
   }) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return Card(
-      elevation: theme.cardTheme.elevation,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Icon(icon, color: colorScheme.primary, size: 20),
-                const SizedBox(width: 8),
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: colorScheme.onSurface,
-                  ),
-                ),
-              ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Text(
+            title,
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+              color: colorScheme.onSurface,
             ),
-            if (items.isNotEmpty) ...[
-              const SizedBox(height: 16),
-              GridView.count(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: 4,
-                mainAxisSpacing: 16,
-                children: items,
-              ),
-            ],
-          ],
+          ),
         ),
-      ),
+        Card(
+          elevation: 0,
+          color: theme.cardTheme.color,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: GridView.count(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: 4,
+              mainAxisSpacing: 16,
+              children: items,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

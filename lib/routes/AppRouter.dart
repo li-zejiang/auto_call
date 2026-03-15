@@ -86,28 +86,37 @@ class ScaffoldWithNavBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: child,
-      bottomNavigationBar: BottomNavigationBar(
-        // 获取当前路由路径来决定选中的 Tab
-        currentIndex: _calculateSelectedIndex(context),
-        onTap: (int idx) => _onItemTapped(idx, context, ref),
-        // 主题配置（在 ThemeProvider 中统一定义）
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.call_outlined),
-            activeIcon: Icon(Icons.call),
-            label: AppConstants.NAV_DIAL,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.people_outline),
-            activeIcon: Icon(Icons.people),
-            label: AppConstants.NAV_CUSTOMER,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings_outlined),
-            activeIcon: Icon(Icons.settings),
-            label: AppConstants.NAV_SETTINGS,
-          ),
-        ],
+      bottomNavigationBar: Theme(
+        data: theme.copyWith(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+        ),
+        child: BottomNavigationBar(
+          // 获取当前路由路径来决定选中的 Tab
+          currentIndex: _calculateSelectedIndex(context),
+          onTap: (int idx) => _onItemTapped(idx, context, ref),
+          // 强制设置相同的字体大小以移除缩放动画
+          selectedFontSize: 11,
+          unselectedFontSize: 11,
+          // 主题配置（在 ThemeProvider 中统一定义）
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.call_outlined),
+              activeIcon: Icon(Icons.call),
+              label: AppConstants.NAV_DIAL,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.people_outline),
+              activeIcon: Icon(Icons.people),
+              label: AppConstants.NAV_CUSTOMER,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings_outlined),
+              activeIcon: Icon(Icons.settings),
+              label: AppConstants.NAV_SETTINGS,
+            ),
+          ],
+        ),
       ),
     );
   }
