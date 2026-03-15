@@ -10,18 +10,18 @@ class SettingsSectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      color: theme.brightness == Brightness.dark 
-          ? colorScheme.surfaceContainerHighest.withValues(alpha: 0.3) 
+      color: theme.brightness == Brightness.dark
+          ? colorScheme.surfaceContainerHighest.withValues(alpha: 0.3)
           : colorScheme.surfaceContainerHighest,
       alignment: Alignment.centerLeft,
       child: Text(
         title,
         style: TextStyle(
-          fontSize: 12, 
+          fontSize: 12,
           color: colorScheme.onSurfaceVariant,
           fontWeight: FontWeight.w500,
         ),
@@ -57,12 +57,13 @@ class SettingsNavigationTile extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            value, 
-            style: TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.5)),
+            value,
+            style:
+                TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.5)),
           ),
           Icon(
-            Icons.chevron_right, 
-            color: colorScheme.onSurface.withValues(alpha: 0.3), 
+            Icons.chevron_right,
+            color: colorScheme.onSurface.withValues(alpha: 0.3),
             size: 20,
           ),
         ],
@@ -102,7 +103,7 @@ class SettingsSwitchTile extends StatelessWidget {
           ),
           value: value,
           onChanged: onChanged,
-          activeColor: colorScheme.primary,
+          activeThumbColor: colorScheme.primary,
         ),
         if (subtitle != null)
           Padding(
@@ -110,7 +111,7 @@ class SettingsSwitchTile extends StatelessWidget {
             child: Text(
               subtitle!,
               style: TextStyle(
-                fontSize: 12, 
+                fontSize: 12,
                 color: colorScheme.onSurface.withValues(alpha: 0.5),
               ),
             ),
@@ -149,11 +150,12 @@ class SettingsDropdownTile<T> extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            value, 
-            style: TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.5)),
+            value,
+            style:
+                TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.5)),
           ),
           Icon(
-            Icons.keyboard_arrow_down, 
+            Icons.keyboard_arrow_down,
             color: colorScheme.onSurface.withValues(alpha: 0.3),
           ),
         ],

@@ -37,7 +37,7 @@ class _DialSettingsPageState extends State<DialSettingsPage> {
           ),
           SettingsDropdownTile<int>(
             title: '拨号间隔',
-            value: '${_dialInterval}秒',
+            value: '$_dialInterval秒',
             options: const [3, 5, 10, 15, 30],
             onChanged: (val) => setState(() => _dialInterval = val),
           ),

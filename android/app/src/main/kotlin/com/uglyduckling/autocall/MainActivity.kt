@@ -1,4 +1,4 @@
-package com.example.auto_call
+package com.uglyduckling.autocall
 
 import io.flutter.embedding.android.FlutterActivity
 

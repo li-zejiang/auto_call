@@ -12,15 +12,11 @@ pluginManagement {
 
     repositories {
         google()
+        mavenCentral()
         maven { url = uri("https://storage.flutter-io.cn/download.flutter.io") }
-        maven {url = uri("https://maven.aliyun.com/repository/google/")}
-        maven {url = uri("https://maven.aliyun.com/repository/releases/")}
-        maven {url = uri("https://maven.aliyun.com/repository/central/")}
-        maven {url = uri("https://maven.aliyun.com/repository/public/")}
-        maven {url = uri("https://maven.aliyun.com/repository/gradle-plugin/")}
-        maven {url = uri("https://maven.aliyun.com/repository/apache-snapshots/")}
-        maven {url = uri("https://maven.aliyun.com/nexus/content/groups/public/")}
-        maven {url = uri("https://jitpack.io/")}
+        maven { url = uri("https://maven.aliyun.com/repository/google") }
+        maven { url = uri("https://maven.aliyun.com/repository/public") }
+        maven { url = uri("https://jitpack.io") }
     }
 }
 

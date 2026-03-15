@@ -79,7 +79,7 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(height: 8),
 
             // 4. 更多设置
-            SettingsGridSection(
+            const SettingsGridSection(
               title: AppConstants.LABEL_MORE_SETTINGS,
               items: serviceCenterItems, // 分享、关于等属于更多/通用设置
             ),
