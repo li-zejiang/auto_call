@@ -45,19 +45,17 @@ workflows:
           flutter build ios --release --no-codesign
       - name: Package IPA for manual signing
         script: |
-          # 1. 清理环境
-          rm -rf Payload Runner.ipa
-          # 2. 创建标准的 Payload 目录
+          # 切换到构建产物目录，避免路径嵌套问题
+          cd build/ios/iphoneos
+          # 清理旧的 Payload
+          rm -rf Payload
           mkdir -p Payload
-          # 3. 使用 -L 参数强制跟随软链接，将所有内容作为真实文件复制
-          cp -RL build/ios/iphoneos/Runner.app Payload/
-          # 4. 确保权限正确，避免签名工具因权限问题报错
-          chmod -R 755 Payload/Runner.app
-          # 5. 使用 -y 参数保留 zip 中的链接属性（虽然我们已经用了 cp -L，但这是双重保险）
-          zip -r -y Runner.ipa Payload
+          # 使用 -RL 强制复制所有文件（不保留软链接，全部实例化）
+          cp -RL Runner.app Payload/
+          # 在当前目录下直接压缩 Payload 文件夹，确保它在 zip 的根目录
+          zip -r ../../../Runner.ipa Payload
     artifacts:
       - "*.ipa"
-      - "build/ios/iphoneos/*.app"
     publishing:
       email:
         recipients:
