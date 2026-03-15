@@ -29,6 +29,8 @@ subprojects {
             if (android.namespace == null) {
                 android.namespace = project.group.toString().ifBlank { "dev.isar.isar_flutter_libs" }
             }
+            android.compileSdk = 36
+            android.defaultConfig.minSdk = 24
         }
     }
 }
