@@ -65,25 +65,25 @@ class SettingsPage extends StatelessWidget {
           children: [
             // 1. 用户信息 Header
             const SettingsHeader(),
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
 
             // 2. 团队空间卡片
             const TeamSpaceCard(),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
 
             // 3. 服务中心
             SettingsGridSection(
               title: AppConstants.LABEL_SERVICE_CENTER,
               items: moreSettingsItems, // 拨号设置等属于服务/业务核心
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
 
             // 4. 更多设置
-            const SettingsGridSection(
+            SettingsGridSection(
               title: AppConstants.LABEL_MORE_SETTINGS,
               items: serviceCenterItems, // 分享、关于等属于更多/通用设置
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 16),
           ],
         ),
       ),

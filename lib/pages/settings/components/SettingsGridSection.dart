@@ -20,7 +20,7 @@ class SettingsGridSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 6),
+          padding: const EdgeInsets.only(top: 4, bottom: 4),
           child: Text(
             title,
             style: TextStyle(
@@ -37,12 +37,12 @@ class SettingsGridSection extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12),
+            padding: const EdgeInsets.symmetric(vertical: 8),
             child: GridView.count(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               crossAxisCount: 4,
-              mainAxisSpacing: 12,
+              mainAxisSpacing: 8,
               children: items,
             ),
           ),
