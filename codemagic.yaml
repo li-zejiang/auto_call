@@ -1,4 +1,32 @@
 workflows:
+  android-workflow:
+    name: Android Workflow
+    instance_type: mac_mini_m1 # Android 也可以在 Mac 环境打包，或者改用 linux 实例
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      java: 17
+    scripts:
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+      - name: Flutter build APK
+        script: |
+          # 构建 Release 版本的 APK
+          # split-per-abi 可以减少单个 APK 的体积，分别生成 arm64, arm-v7a 等
+          flutter build apk --release --split-per-abi
+      - name: Flutter build App Bundle
+        script: |
+          # 构建用于上架 Google Play 的 .aab 文件
+          flutter build appbundle --release
+    artifacts:
+      - build/app/outputs/flutter-apk/*.apk
+      - build/app/outputs/bundle/release/*.aab
+    publishing:
+      email:
+        recipients:
+          - 1575214258@qq.com
+
   ios-workflow:
     name: iOS Workflow
     instance_type: mac_mini_m1
@@ -23,4 +51,4 @@ workflows:
     publishing:
       email:
         recipients:
-          - 1575214258@qq.com # 替换为你的邮箱
+          - 1575214258@qq.com
