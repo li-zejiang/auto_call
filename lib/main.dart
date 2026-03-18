@@ -7,6 +7,7 @@ import 'stores/StorageService.dart';
 import 'components/CommonToast.dart';
 import 'utils/NotificationService.dart';
 import 'utils/ForegroundServiceManager.dart';
+import 'utils/FluwxInstance.dart';
 import 'viewmodels/ThemeProvider.dart';
 
 /// 应用启动入口
@@ -26,6 +27,10 @@ void main() async {
 
   // 3. 初始化持久化存储服务 (Isar)
   final storage = StorageService();
+  await fluwxInstance.registerApi(
+    appId: AppConstants.WECHAT_APP_ID,
+    universalLink: AppConstants.WECHAT_UNIVERSAL_LINK,
+  );
 
   runApp(
     ProviderScope(

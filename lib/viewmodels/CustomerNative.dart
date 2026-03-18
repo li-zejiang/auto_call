@@ -1,6 +1,5 @@
 import 'package:isar/isar.dart';
 
-export 'CustomerNative.dart';
 part 'CustomerNative.g.dart';
 
 @collection

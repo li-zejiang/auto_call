@@ -16,6 +16,7 @@ class CallUtils {
         await launchUrl(url);
       } else {
         // 如果无法直接拨号，尝试复制到剪贴板并提示
+        if (!context.mounted) return;
         await _fallbackToClipboard(context, cleanNumber);
       }
     } catch (e) {

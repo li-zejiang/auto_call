@@ -1,19 +1,24 @@
 import 'package:auto_call/components/CommonToast.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../components/CustomAppBar.dart';
 import '../../components/GridItem.dart';
 import '../../constants/AppConstants.dart';
+import '../../viewmodels/AuthProvider.dart';
 import 'components/SettingsHeader.dart';
 import 'components/TeamSpaceCard.dart';
 import 'components/SettingsGridSection.dart';
 
 /// 设置与个人中心页面
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final authState = ref.watch(authProvider);
+    final isLoggedIn = authState.isAuthenticated;
+
     // 更多设置项
     final moreSettingsItems = [
       GridItem(AppConstants.LABEL_DIAL_SETTINGS, Icons.settings_phone,
@@ -52,9 +57,11 @@ class SettingsPage extends StatelessWidget {
             icon: Icons.person_outline,
             label: AppConstants.LABEL_PERSONAL_INFO,
             onPressed: () {
-              CommonToast.show(
-                  '${AppConstants.LABEL_PERSONAL_INFO}${AppConstants.MSG_NOT_IMPLEMENTED}',
-                  context: context);
+              if (isLoggedIn) {
+                context.push('/profile');
+              } else {
+                context.push('/login');
+              }
             },
           ),
         ],

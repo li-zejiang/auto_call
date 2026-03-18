@@ -23,11 +23,17 @@ class AppConstants {
   static const double BORDER_RADIUS = 12.0;
   static const double PADDING = 16.0;
 
+  static const String WECHAT_APP_ID = 'wxa02c19b91f566efd';
+  static const String WECHAT_UNIVERSAL_LINK = 'https://example.com/app/';
+
   // 页面标题
   static const String TITLE_DIAL = '自动拨号';
   static const String TITLE_CUSTOMER = '客户管理';
   static const String TITLE_STATS = '拨打统计';
   static const String TITLE_PROFILE = '个人中心';
+  static const String TITLE_LOGIN = '登录';
+  static const String TITLE_REGISTER = '注册';
+  static const String TITLE_USER_INFO = '个人信息';
 
   // 底部导航栏标签
   static const String NAV_DIAL = '拨号';
@@ -80,7 +86,7 @@ class AppConstants {
   static const String LABEL_SERVICE_CENTER = '服务中心';
   static const String LABEL_MORE_SETTINGS = '更多设置';
   static const String LABEL_BUY_MEMBER = '购买会员';
-  static const String LABEL_MEMBER_EXPIRED = '会员特权已到期';
+  static const String LABEL_MEMBER_EXPIRED = '会员已过期';
   static const String LABEL_PERSONAL_INFO = '个人信息';
   static const String LABEL_LEARN_MORE = '了解更多';
   static const String LABEL_MANUAL_DIAL = '手动拨号';
