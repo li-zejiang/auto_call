@@ -7,10 +7,25 @@ final storageServiceProvider = Provider<StorageService>((ref) {
   return StorageService();
 });
 
+abstract class CustomerBackend {
+  Future<void> upsertCustomer(Customer customer);
+}
+
+class NoopCustomerBackend implements CustomerBackend {
+  @override
+  Future<void> upsertCustomer(Customer customer) async {}
+}
+
+final customerBackendProvider = Provider<CustomerBackend>((ref) {
+  return NoopCustomerBackend();
+});
+
 // Customer List Provider
 class CustomerListController extends StateNotifier<AsyncValue<List<Customer>>> {
   final StorageService _storage;
-  CustomerListController(this._storage) : super(const AsyncValue.loading()) {
+  final CustomerBackend _backend;
+  CustomerListController(this._storage, this._backend)
+      : super(const AsyncValue.loading()) {
     loadCustomers();
   }
 
@@ -24,8 +39,20 @@ class CustomerListController extends StateNotifier<AsyncValue<List<Customer>>> {
     }
   }
 
-  Future<void> addCustomer(Customer customer) async {
+  Future<void> saveCustomer(Customer customer) async {
     await _storage.saveCustomer(customer);
+    try {
+      await _backend.upsertCustomer(customer);
+    } catch (_) {}
+    await loadCustomers();
+  }
+
+  Future<void> addCustomer(Customer customer) async {
+    await saveCustomer(customer);
+  }
+
+  Future<void> deleteCustomer(int id) async {
+    await _storage.deleteCustomer(id);
     await loadCustomers();
   }
 
@@ -48,5 +75,6 @@ final customerListProvider =
     StateNotifierProvider<CustomerListController, AsyncValue<List<Customer>>>(
         (ref) {
   final storage = ref.watch(storageServiceProvider);
-  return CustomerListController(storage);
+  final backend = ref.watch(customerBackendProvider);
+  return CustomerListController(storage, backend);
 });

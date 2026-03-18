@@ -7,7 +7,11 @@ import '../pages/settings/index.dart';
 import '../pages/settings/components/AccessibilityPage.dart';
 import '../pages/settings/components/DialSettingsPage.dart';
 import '../pages/settings/components/SmsSettingsPage.dart';
+import '../pages/login/index.dart';
+import '../pages/profile/index.dart';
+import '../pages/customer/AddCustomer.dart';
 import '../constants/AppConstants.dart';
+import '../viewmodels/Customer.dart';
 
 /// 路由管理配置
 ///
@@ -69,6 +73,31 @@ final router = GoRouter(
       path: '/sms-settings',
       parentNavigatorKey: _rootNavigatorKey,
       builder: (context, state) => const SmsSettingsPage(),
+    ),
+    // 登录页
+    GoRoute(
+      path: '/login',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) => const LoginPage(),
+    ),
+    // 个人信息页
+    GoRoute(
+      path: '/profile',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) => const ProfilePage(),
+    ),
+    GoRoute(
+      path: '/customer/add',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) => const AddCustomerPage(),
+    ),
+    GoRoute(
+      path: '/customer/edit',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) {
+        final customer = state.extra as Customer;
+        return AddCustomerPage(initialCustomer: customer);
+      },
     ),
   ],
 );

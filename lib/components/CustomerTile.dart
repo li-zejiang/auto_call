@@ -7,11 +7,13 @@ import '../constants/AppConstants.dart';
 class CustomerTile extends StatelessWidget {
   final Customer customer;
   final VoidCallback onTap;
+  final VoidCallback? onLongPress;
 
   const CustomerTile({
     super.key,
     required this.customer,
     required this.onTap,
+    this.onLongPress,
   });
 
   @override
@@ -22,10 +24,13 @@ class CustomerTile extends StatelessWidget {
     return Card(
       elevation: theme.cardTheme.elevation,
       margin: const EdgeInsets.symmetric(
-          horizontal: AppConstants.PADDING, vertical: 8),
+          horizontal: 10, vertical: 6),
       child: ListTile(
         onTap: onTap,
-        contentPadding: const EdgeInsets.all(AppConstants.PADDING),
+        onLongPress: onLongPress,
+        dense: true,
+        visualDensity: VisualDensity.compact,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         title: Row(
           children: [
             // 标签容器
@@ -54,19 +59,19 @@ class CustomerTile extends StatelessWidget {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 8),
+            const SizedBox(height: 6),
             // 电话显示
             Text(
               '${AppConstants.FIELD_PHONE}${customer.phone}',
               style: TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.7)),
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 2),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 // 创建时间
                 Text(
-                  DateFormat('yyyy年MM月dd日 HH:mm:ss').format(customer.createdAt),
+                  DateFormat('yyyy-MM-dd HH:mm').format(customer.createdAt),
                   style: TextStyle(
                     color: colorScheme.onSurface.withValues(alpha: 0.5),
                     fontSize: 12,
